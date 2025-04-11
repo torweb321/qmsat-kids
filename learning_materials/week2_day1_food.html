@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第2周 周一: 食物词汇</title>
+    <script>
+        // 语音朗读功能
+        function speak(text, lang = 'en-US') {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.8; // 语速稍慢，适合儿童学习
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('您的浏览器不支持语音合成功能');
+            }
+        }
+        
+        // 页面加载完成后初始化语音按钮
+        document.addEventListener('DOMContentLoaded', function() {
+            const speakButtons = document.querySelectorAll('.speak-btn');
+            speakButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const text = this.getAttribute('data-text');
+                    const lang = this.getAttribute('data-lang') || 'en-US';
+                    speak(text, lang);
+                });
+            });
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #ffeb3b;
+            border-radius: 10px;
+            color: #333;
+        }
+        h1 {
+            color: #e91e63;
+            font-size: 1.8rem;
+        }
+        h2 {
+            color: #2196f3;
+            margin-top: 20px;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #555;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .card {
+            width: 150px;
+            text-align: center;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 10px;
+            border: 3px solid #2196f3;
+        }
+        .card .emoji {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .card h3 {
+            margin: 10px 0;
+            color: #0d47a1;
+            font-size: 1.5rem;
+        }
+        .card p {
+            color: #555;
+            font-size: 1.2rem;
+        }
+        .activity {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #4caf50;
+        }
+        .activity h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        .activity ol {
+            margin-left: 20px;
+        }
+        .activity li {
+            margin-bottom: 10px;
+        }
+        .sentence {
+            background-color: #fff9c4;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #827717;
+        }
+        .matching-game {
+            background-color: #f3e5f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #9c27b0;
+        }
+        .matching-game h3 {
+            color: #6a1b9a;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .matching-pairs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .matching-pair {
+            display: flex;
+            align-items: center;
+            background-color: #e1bee7;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #9c27b0;
+            width: 200px;
+        }
+        .matching-pair .emoji {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+        .matching-pair .text {
+            font-size: 1.2rem;
+            color: #4a148c;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #ffeb3b;
+            border-radius: 10px;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        .speak-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .speak-btn:hover {
+            background-color: #f57c00;
+            transform: scale(1.1);
+        }
+        @media print {
+            body {
+                background-color: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .speak-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>第2周 周一: 食物词汇</h1>
+            <p class="subtitle">SAT启蒙 - 每日10分钟学习计划</p>
+        </header>
+
+        <h2>今日学习目标</h2>
+        <p>学习5个基础食物词汇，能够听、说、认图</p>
+
+        <div class="card-container">
+            <div class="card">
+                <div class="emoji">🍎</div>
+                <h3>Apple <button class="speak-btn" data-text="Apple" title="朗读">🔊</button></h3>
+                <p>苹果</p>
+            </div>
+            <div class="card">
+                <div class="emoji">🍌</div>
+                <h3>Banana <button class="speak-btn" data-text="Banana" title="朗读">🔊</button></h3>
+                <p>香蕉</p>
+            </div>
+            <div class="card">
+                <div class="emoji">🥛</div>
+                <h3>Milk <button class="speak-btn" data-text="Milk" title="朗读">🔊</button></h3>
+                <p>牛奶</p>
+            </div>
+            <div class="card">
+                <div class="emoji">🍞</div>
+                <h3>Bread <button class="speak-btn" data-text="Bread" title="朗读">🔊</button></h3>
+                <p>面包</p>
+            </div>
+            <div class="card">
+                <div class="emoji">🥚</div>
+                <h3>Egg <button class="speak-btn" data-text="Egg" title="朗读">🔊</button></h3>
+                <p>鸡蛋</p>
+            </div>
+        </div>
+
+        <div class="activity">
+            <h3>互动游戏</h3>
+            <ol>
+                <li><strong>找一找游戏</strong>: 说出食物词汇，请孩子指认正确的图片</li>
+                <li><strong>喜好表达</strong>: 练习说"I like apples."（我喜欢苹果）等句型</li>
+                <li><strong>分类游戏</strong>: 将食物分为水果类和非水果类</li>
+            </ol>
+        </div>
+
+        <div class="sentence">
+            <p>I eat bread. 我吃面包。 <button class="speak-btn" data-text="I eat bread." title="朗读">🔊</button></p>
+            <p>I like bananas. 我喜欢香蕉。 <button class="speak-btn" data-text="I like bananas." title="朗读">🔊</button></p>
+        </div>
+
+        <div class="matching-game">
+            <h3>配对游戏</h3>
+            <p>将食物与对应的英文单词连接起来</p>
+            <div class="matching-pairs">
+                <div class="matching-pair">
+                    <div class="emoji">🍎</div>
+                    <div class="text">Apple <button class="speak-btn" data-text="Apple" title="朗读">🔊</button></div>
+                </div>
+                <div class="matching-pair">
+                    <div class="emoji">🍌</div>
+                    <div class="text">Banana <button class="speak-btn" data-text="Banana" title="朗读">🔊</button></div>
+                </div>
+                <div class="matching-pair">
+                    <div class="emoji">🥛</div>
+                    <div class="text">Milk <button class="speak-btn" data-text="Milk" title="朗读">🔊</button></div>
+                </div>
+                <div class="matching-pair">
+                    <div class="emoji">🍞</div>
+                    <div class="text">Bread <button class="speak-btn" data-text="Bread" title="朗读">🔊</button></div>
+                </div>
+                <div class="matching-pair">
+                    <div class="emoji">🥚</div>
+                    <div class="text">Egg <button class="speak-btn" data-text="Egg" title="朗读">🔊</button></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="activity">
+            <h3>家庭延伸活动</h3>
+            <ol>
+                <li>在家中寻找这些食物，并用英语命名</li>
+                <li>用彩色笔画出这些食物，并标注英文名称</li>
+                <li>用"I like..."和"I eat..."句型描述自己喜欢的食物</li>
+                <li>观看简单的英语食物歌谣视频</li>
+            </ol>
+        </div>
+
+        <footer>
+            <p>小小SAT启蒙教材 - 家长打印版</p>
+            <p>适合6岁幼儿园中班小朋友</p>
+            <p><small>点击单词旁边的🔊按钮可以听发音</small></p>
+        </footer>
+    </div>
+</body>
+</html>

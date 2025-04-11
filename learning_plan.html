@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAT启蒙教育 - 每日10分钟学习计划</title>
+    <script>
+        // 语音朗读功能
+        function speak(text, lang = 'en-US') {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.8; // 语速稍慢，适合儿童学习
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('您的浏览器不支持语音合成功能');
+            }
+        }
+
+        // 页面加载完成后初始化语音按钮
+        document.addEventListener('DOMContentLoaded', function() {
+            const speakButtons = document.querySelectorAll('.speak-btn');
+            speakButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const text = this.getAttribute('data-text');
+                    const lang = this.getAttribute('data-lang') || 'en-US';
+                    speak(text, lang);
+                });
+            });
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #ffeb3b;
+            border-radius: 10px;
+            color: #333;
+        }
+        h1 {
+            color: #e91e63;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #2196f3;
+            margin-top: 30px;
+            border-bottom: 2px solid #2196f3;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #4caf50;
+            margin-top: 20px;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #555;
+        }
+        .intro {
+            background-color: #e1f5fe;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #03a9f4;
+        }
+        .week-container {
+            margin-bottom: 40px;
+        }
+        .week-header {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #4caf50;
+        }
+        .day-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .day-card {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            padding: 15px;
+            border: 2px solid #9e9e9e;
+            transition: all 0.3s;
+        }
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .day-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .day-content {
+            color: #555;
+        }
+        .day-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            color: white;
+        }
+        .btn {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #4caf50;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background-color: #388e3c;
+            transform: scale(1.05);
+        }
+        .btn.disabled {
+            background-color: #9e9e9e;
+            cursor: not-allowed;
+        }
+        .btn.disabled:hover {
+            background-color: #9e9e9e;
+            transform: none;
+        }
+        .tag-english {
+            background-color: #2196f3;
+        }
+        .tag-math {
+            background-color: #9c27b0;
+        }
+        .tag-reading {
+            background-color: #ff9800;
+        }
+        .tag-skills {
+            background-color: #4caf50;
+        }
+        .tag-review {
+            background-color: #f44336;
+        }
+        .notes {
+            background-color: #fff9c4;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px solid #ffc107;
+        }
+        .notes h3 {
+            color: #ff6f00;
+            margin-top: 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #ffeb3b;
+            border-radius: 10px;
+            color: #333;
+        }
+        .speak-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .speak-btn:hover {
+            background-color: #f57c00;
+            transform: scale(1.1);
+        }
+        @media print {
+            body {
+                background-color: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .day-card {
+                break-inside: avoid;
+            }
+            .week-container {
+                break-after: page;
+            }
+            .speak-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SAT启蒙教育</h1>
+            <p class="subtitle">适合6岁幼儿园中班小朋友的每日10分钟学习计划</p>
+        </header>
+
+        <div class="intro">
+            <h2>学习计划介绍</h2>
+            <p>这套SAT启蒙教育计划专为6岁幼儿园中班小朋友设计，每天只需10分钟，通过有趣的活动培养孩子的英语、数学和阅读能力，为未来的学习打下坚实基础。</p>
+            <p>计划特点：</p>
+            <ul>
+                <li>每天专注一个主题，避免内容过多</li>
+                <li>英语、阅读、数学、综合能力交替进行，保持新鲜感</li>
+                <li>难度循序渐进，由易到难</li>
+                <li>相关内容在不同日期有所重复，加强记忆</li>
+                <li>每周末进行小复习</li>
+            </ul>
+        </div>
+
+        <div class="week-container">
+            <h2>第1周: 基础入门</h2>
+            <div class="week-header">
+                <p>第一周我们将从最基础的内容开始，包括动物词汇、颜色词汇、数字1-5的认识，以及简单的观察力训练和动物故事阅读。</p>
+            </div>
+            <div class="day-grid">
+                <div class="day-card">
+                    <div class="day-title">周一: 动物词汇</div>
+                    <div class="day-content">学习5个基础动物词汇：cat, dog, bird, fish, rabbit，能够听、说、认图</div>
+                    <span class="day-tag tag-english">英语</span>
+                    <div><a href="learning_materials/week1_day1_animals.html" class="btn">开始学习</a></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-title">周二: 数字1-5</div>
+                    <div class="day-content">认识数字1-5，理解数量与数字的对应关系</div>
+                    <span class="day-tag tag-math">数学</span>
+                    <div><a href="learning_materials/week1_day2_numbers.html" class="btn">开始学习</a></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-title">周三: 颜色词汇</div>
+                    <div class="day-content">学习5种基本颜色：red, blue, yellow, green, purple</div>
+                    <span class="day-tag tag-english">英语</span>
+                    <div><a href="learning_materials/week1_day3_colors.html" class="btn">开始学习</a></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-title">周四: 观察力训练</div>
+                    <div class="day-content">培养细节观察能力，提高视觉辨别能力</div>
+                    <span class="day-tag tag-skills">能力</span>
+                    <div><a href="learning_materials/week1_day4_observation.html" class="btn">开始学习</a></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-title">周五: 动物故事</div>
+                    <div class="day-content">通过简单故事提高英语理解能力，培养阅读兴趣</div>
+                    <span class="day-tag tag-reading">阅读</span>
+                    <div><a href="learning_materials/week1_day5_animal_story_with_audio.html" class="btn">开始学习</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="week-container">
+            <h2>第2周: 基础拓展</h2>
+            <div class="week-header">
+                <p>第二周我们将拓展基础知识，学习食物词汇、数字6-10、字母A-E，以及注意力训练，并在周五进行第1-2周的内容复习。</p>
+            </div>
+            <div class="day-grid">
+                <div class="day-card">
+                    <div class="day-title">周一: 食物词汇</div>
+                    <div class="day-content">学习5个食物词汇：apple, banana, milk, bread, egg</div>
+                    <span class="day-tag tag-english">英语</span>
+                    <div><a href="learning_materials/week2_day1_food.html" class="btn">开始学习</a></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-title">周二: 数字6-10</div>
+                    <div class="day-content">认识数字6-10，理解数量与数字的对应关系</div>
+                    <span class="day-tag tag-math">数学</span>
+                    <div><a href="learning_materials/week2_day2_numbers.html" class="btn">开始学习</a></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-title">周三: 字母A-E</div>
+                    <div class="day-content">认识字母A、B、C、D、E的形状和发音</div>
+                    <span class="day-tag tag-english">英语</span>
+                    <div><a href="#" class="btn disabled">即将推出</a></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-title">周四: 注意力训练</div>
+                    <div class="day-content">通过简单游戏提高专注力和持续注意力</div>
+                    <span class="day-tag tag-skills">能力</span>
+                    <div><a href="#" class="btn disabled">即将推出</a></div>
+                </div>
+                <div class="day-card">
+                    <div class="day-title">周五: 复习</div>
+                    <div class="day-content">复习第1-2周学习的内容，巩固记忆</div>
+                    <span class="day-tag tag-review">复习</span>
+                    <div><a href="#" class="btn disabled">即将推出</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="week-container">
+            <h2>第3周: 语言提升</h2>
+            <div class="week-header">
+                <p>第三周我们将提升语言能力，学习家庭成员词汇、简单加法、问候语，以及家庭故事阅读和手眼协调训练。</p>
+            </div>
+            <div class="day-grid">
+                <div class="day-card">
+                    <div class="day-title">周一: 家庭成员</div>
+                    <div class="day-content">学习家庭成员词汇：mom, dad, sister, brother, baby</div>
+                    <span class="day-tag tag-english">英语</span>
+                </div>
+                <div class="day-card">
+                    <div class="day-title">周二: 简单加法</div>
+                    <div class="day-content">学习5以内的加法，通过实物和图片理解加法概念</div>
+                    <span class="day-tag tag-math">数学</span>
+                </div>
+                <div class="day-card">
+                    <div class="day-title">周三: 简单问候</div>
+                    <div class="day-content">学习基本问候语：Hello, Hi, Good morning, How are you, I'm fine</div>
+                    <span class="day-tag tag-english">英语</span>
+                </div>
+                <div class="day-card">
+                    <div class="day-title">周四: 家庭故事</div>
+                    <div class="day-content">阅读关于家庭的简单故事，提高理解能力</div>
+                    <span class="day-tag tag-reading">阅读</span>
+                </div>
+                <div class="day-card">
+                    <div class="day-title">周五: 手眼协调</div>
+                    <div class="day-content">通过描线、剪纸等活动提高手眼协调能力</div>
+                    <span class="day-tag tag-skills">能力</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="notes">
+            <h3>家长使用说明</h3>
+            <p>1. <strong>每日坚持</strong>：每天安排固定的10分钟时间进行学习，保持规律性</p>
+            <p>2. <strong>积极鼓励</strong>：多给予孩子积极的反馈和鼓励，增强学习兴趣</p>
+            <p>3. <strong>生活融入</strong>：将学习内容融入日常生活，如购物时认识颜色、数数水果等</p>
+            <p>4. <strong>互动学习</strong>：通过游戏、角色扮演等方式增加互动性</p>
+            <p>5. <strong>适度调整</strong>：根据孩子的接受能力和兴趣适当调整学习内容和进度</p>
+            <p>6. <strong>复习巩固</strong>：定期复习已学内容，加深记忆</p>
+        </div>
+
+        <footer>
+            <p>小小SAT启蒙教材 - 家长打印版</p>
+            <p>适合6岁幼儿园中班小朋友</p>
+            <p>每天10分钟，轻松启蒙，快乐学习</p>
+        </footer>
+    </div>
+</body>
+</html>

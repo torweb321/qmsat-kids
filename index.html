@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小小SAT启蒙 - 适合6岁儿童</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>小小SAT启蒙</h1>
+            <p class="subtitle">专为6岁小朋友设计的学习资料</p>
+        </header>
+
+        <nav>
+            <button class="nav-btn active" data-section="vocabulary">词汇学习</button>
+            <button class="nav-btn" data-section="math">数学启蒙</button>
+            <button class="nav-btn" data-section="reading">阅读理解</button>
+            <a href="learning_plan.html" class="plan-btn">学习计划</a>
+            <button class="print-btn" id="printBtn">打印本页</button>
+        </nav>
+
+        <main>
+            <!-- 词汇学习部分 -->
+            <section id="vocabulary" class="content-section active">
+                <h2>基础词汇学习</h2>
+
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-front">
+                            <div class="img-placeholder" data-img="apple">苹果图片</div>
+                            <h3>Apple</h3>
+                        </div>
+                        <div class="card-back">
+                            <h3>苹果</h3>
+                            <p>这是一个苹果。</p>
+                            <p>Apple starts with letter A.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-front">
+                            <div class="img-placeholder" data-img="banana">香蕉图片</div>
+                            <h3>Banana</h3>
+                        </div>
+                        <div class="card-back">
+                            <h3>香蕉</h3>
+                            <p>这是一根香蕉。</p>
+                            <p>Banana starts with letter B.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-front">
+                            <div class="img-placeholder" data-img="cat">猫图片</div>
+                            <h3>Cat</h3>
+                        </div>
+                        <div class="card-back">
+                            <h3>猫</h3>
+                            <p>这是一只猫。</p>
+                            <p>Cat starts with letter C.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <h3>小活动：连线游戏</h3>
+                    <p>请将英文单词与对应的中文意思连接起来：</p>
+                    <div class="matching-game">
+                        <div class="left-items">
+                            <div class="match-item">Apple</div>
+                            <div class="match-item">Banana</div>
+                            <div class="match-item">Cat</div>
+                        </div>
+                        <div class="right-items">
+                            <div class="match-item">猫</div>
+                            <div class="match-item">苹果</div>
+                            <div class="match-item">香蕉</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 数学启蒙部分 -->
+            <section id="math" class="content-section">
+                <h2>数学启蒙</h2>
+
+                <div class="math-section">
+                    <h3>数字认识 (1-10)</h3>
+                    <div class="number-container">
+                        <div class="number-card">
+                            <div class="img-placeholder" data-img="number1">1个苹果图片</div>
+                            <h3>1 - One</h3>
+                            <p>一</p>
+                        </div>
+                        <div class="number-card">
+                            <div class="img-placeholder" data-img="number2">2个苹果图片</div>
+                            <h3>2 - Two</h3>
+                            <p>二</p>
+                        </div>
+                        <div class="number-card">
+                            <div class="img-placeholder" data-img="number3">3个苹果图片</div>
+                            <h3>3 - Three</h3>
+                            <p>三</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <h3>小活动：简单加法</h3>
+                    <div class="math-problem">
+                        <div class="img-placeholder" data-img="addition1">1+1=?图片</div>
+                        <p>1 + 1 = ?</p>
+                        <div class="options">
+                            <button class="option-btn">1</button>
+                            <button class="option-btn correct">2</button>
+                            <button class="option-btn">3</button>
+                        </div>
+                    </div>
+                    <div class="math-problem">
+                        <div class="img-placeholder" data-img="addition2">2+1=?图片</div>
+                        <p>2 + 1 = ?</p>
+                        <div class="options">
+                            <button class="option-btn">2</button>
+                            <button class="option-btn correct">3</button>
+                            <button class="option-btn">4</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 阅读理解部分 -->
+            <section id="reading" class="content-section">
+                <h2>阅读理解启蒙</h2>
+
+                <div class="story-section">
+                    <h3>简单故事</h3>
+                    <div class="story">
+                        <div class="img-placeholder large" data-img="story1">小猫故事图片</div>
+                        <div class="story-text">
+                            <p><strong>The Little Cat</strong></p>
+                            <p>I see a cat.</p>
+                            <p>The cat is little.</p>
+                            <p>The little cat likes milk.</p>
+                            <p>The little cat is happy.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <h3>小活动：理解问题</h3>
+                    <div class="question">
+                        <p>1. What does the cat like?</p>
+                        <div class="options">
+                            <button class="option-btn">Water</button>
+                            <button class="option-btn correct">Milk</button>
+                            <button class="option-btn">Fish</button>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>2. Is the cat big or little?</p>
+                        <div class="options">
+                            <button class="option-btn">Big</button>
+                            <button class="option-btn correct">Little</button>
+                            <button class="option-btn">Medium</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>小小SAT启蒙教材 - 家长打印版</p>
+            <p>适合6岁幼儿园中班小朋友</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

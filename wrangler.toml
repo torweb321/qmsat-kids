@@ -1,0 +1,16 @@
+[site]
+bucket = "./"
+entry-point = "."
+
+[site.upload]
+format = "directory"
+
+[env.production]
+name = "qmsat-kids"
+route = ""
+zone_id = ""
+
+[env.staging]
+name = "qmsat-kids-staging"
+route = ""
+zone_id = ""

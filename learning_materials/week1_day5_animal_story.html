@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第1周 周五: 动物故事</title>
+    <script>
+        // 语音朗读功能
+        function speak(text, lang = 'en-US') {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.8; // 语速稍慢，适合儿童学习
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('您的浏览器不支持语音合成功能');
+            }
+        }
+
+        // 页面加载完成后初始化语音按钮
+        document.addEventListener('DOMContentLoaded', function() {
+            const speakButtons = document.querySelectorAll('.speak-btn');
+            speakButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const text = this.getAttribute('data-text');
+                    const lang = this.getAttribute('data-lang') || 'en-US';
+                    speak(text, lang);
+                });
+            });
+
+            // 故事朗读功能
+            const readStoryBtn = document.getElementById('read-story-btn');
+            if (readStoryBtn) {
+                readStoryBtn.addEventListener('click', function() {
+                    const storyLines = document.querySelectorAll('.story-text p');
+                    let delay = 0;
+                    const lineDelay = 3000; // 每行之间的间隔时间（毫秒）
+
+                    storyLines.forEach(line => {
+                        const englishText = line.textContent.split('(')[0].trim();
+                        setTimeout(() => {
+                            speak(englishText);
+                        }, delay);
+                        delay += lineDelay;
+                    });
+                });
+            }
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #ffeb3b;
+            border-radius: 10px;
+            color: #333;
+        }
+        h1 {
+            color: #e91e63;
+            font-size: 1.8rem;
+        }
+        h2 {
+            color: #2196f3;
+            margin-top: 20px;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #555;
+        }
+        .activity {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #4caf50;
+        }
+        .activity h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        .activity ol {
+            margin-left: 20px;
+        }
+        .activity li {
+            margin-bottom: 10px;
+        }
+        .story {
+            background-color: #ffecb3;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #ffc107;
+        }
+        .story h3 {
+            color: #ff6f00;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        .story-image {
+            width: 90%;
+            height: 200px;
+            margin: 20px auto;
+            border: 2px dashed #ff9800;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: #e65100;
+            background-color: #fff8e1;
+        }
+        .story-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 20px 0;
+            color: #5d4037;
+        }
+        .story-text p {
+            margin-bottom: 10px;
+        }
+        .questions {
+            background-color: #fff9c4;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .questions h3 {
+            color: #827717;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f0f4c3;
+            border-radius: 8px;
+        }
+        .question p {
+            font-weight: bold;
+            color: #33691e;
+            margin-bottom: 10px;
+        }
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .option {
+            padding: 8px 15px;
+            background-color: #dcedc8;
+            border: 2px solid #8bc34a;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #33691e;
+        }
+        .option.correct {
+            background-color: #c5e1a5;
+            border-color: #689f38;
+            font-weight: bold;
+        }
+        .vocabulary {
+            background-color: #e1f5fe;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .vocabulary h3 {
+            color: #01579b;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .vocab-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .vocab-item {
+            width: 120px;
+            text-align: center;
+            padding: 10px;
+            background-color: #b3e5fc;
+            border: 2px solid #0288d1;
+            border-radius: 8px;
+        }
+        .vocab-item .emoji {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        .vocab-item .word {
+            font-weight: bold;
+            color: #01579b;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #ffeb3b;
+            border-radius: 10px;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        .speak-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .speak-btn:hover {
+            background-color: #f57c00;
+            transform: scale(1.1);
+        }
+        .read-story-btn {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 15px auto;
+            transition: all 0.3s;
+            display: block;
+        }
+        .read-story-btn:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
+        @media print {
+            body {
+                background-color: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>第1周 周五: 动物故事</h1>
+            <p class="subtitle">SAT启蒙 - 每日10分钟学习计划</p>
+        </header>
+
+        <h2>今日学习目标</h2>
+        <p>通过简单故事提高英语理解能力，培养阅读兴趣</p>
+
+        <div class="activity">
+            <h3>热身活动</h3>
+            <ol>
+                <li><strong>复习动物词汇</strong>: cat, dog, bird, fish, rabbit</li>
+                <li><strong>动物声音模仿</strong>: 模仿不同动物的声音，如猫"meow"、狗"woof"</li>
+            </ol>
+        </div>
+
+        <div class="story">
+            <h3>The Little Cat <button class="speak-btn" data-text="The Little Cat" title="朗读">🔊</button></h3>
+            <div class="story-image">
+                小猫故事图片<br>(这里应有一张小猫和小狗玩耍的图片)
+            </div>
+            <div class="story-text">
+                <p>I see a cat. (我看见一只猫。)</p>
+                <p>The cat is little. (这只猫很小。)</p>
+                <p>The little cat is white. (这只小猫是白色的。)</p>
+                <p>The little cat likes milk. (这只小猫喜欢牛奶。)</p>
+                <p>The little cat sees a dog. (这只小猫看见了一只狗。)</p>
+                <p>The dog is big. (这只狗很大。)</p>
+                <p>The little cat and the big dog play together. (这只小猫和这只大狗一起玩耍。)</p>
+                <p>They are happy. (它们很开心。)</p>
+            </div>
+        </div>
+
+        <div class="questions">
+            <h3>理解问题</h3>
+            <div class="question">
+                <p>1. What color is the cat?</p>
+                <div class="options">
+                    <div class="option">Black</div>
+                    <div class="option correct">White</div>
+                    <div class="option">Brown</div>
+                </div>
+            </div>
+            <div class="question">
+                <p>2. What does the cat like?</p>
+                <div class="options">
+                    <div class="option correct">Milk</div>
+                    <div class="option">Fish</div>
+                    <div class="option">Water</div>
+                </div>
+            </div>
+            <div class="question">
+                <p>3. Is the dog small or big?</p>
+                <div class="options">
+                    <div class="option">Small</div>
+                    <div class="option correct">Big</div>
+                    <div class="option">Little</div>
+                </div>
+            </div>
+            <div class="question">
+                <p>4. Are the cat and dog happy?</p>
+                <div class="options">
+                    <div class="option correct">Yes</div>
+                    <div class="option">No</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vocabulary">
+            <h3>故事中的词汇</h3>
+            <div class="vocab-list">
+                <div class="vocab-item">
+                    <div class="emoji">🐱</div>
+                    <div class="word">Cat</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="emoji">🐶</div>
+                    <div class="word">Dog</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="emoji">⬜</div>
+                    <div class="word">White</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="emoji">🥛</div>
+                    <div class="word">Milk</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="emoji">😊</div>
+                    <div class="word">Happy</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="activity">
+            <h3>延伸活动</h3>
+            <ol>
+                <li><strong>角色扮演</strong>: 扮演故事中的小猫和大狗</li>
+                <li><strong>创编故事</strong>: 想象小猫和大狗接下来会做什么</li>
+                <li><strong>绘画活动</strong>: 画出故事中的场景</li>
+            </ol>
+        </div>
+
+        <footer>
+            <p>小小SAT启蒙教材 - 家长打印版</p>
+            <p>适合6岁幼儿园中班小朋友</p>
+        </footer>
+    </div>
+</body>
+</html>
